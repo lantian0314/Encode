@@ -26,8 +26,8 @@ public class DH {
 	private static final String ALGORITHM = "DH";
 	private static final int KEY_SIZE = 1024;
 
-	private static String publicKey = null;
-	private static String privateKey = null;
+	private static String PublicKey ="DHPublicKey";
+	private static String PrivateKey ="DHPrivateKey";
 
 	public void main() {
 		String data = "hhhhhhhhhhhhhhhhhhhhhh";
@@ -37,15 +37,17 @@ public class DH {
 		Tools.printLog("APublicKey:"+getPublicKey(Akey));
 		Map<String, Object> bkey = initBkey(getPublicKey(Akey));
 		
-		Tools.printLog("BPrivateKey"+getPrivateKey(bkey));
+		Tools.printLog("BPrivateKey:"+getPrivateKey(bkey));
+		
+		Tools.printLog("BPublicKey:"+getPublicKey(bkey));
+		Tools.printLog("APrivateKey:"+getPrivateKey(Akey));
 		
 		byte[] encodeBytes = encode(
-				Base64.encode(data.getBytes(), Base64.DEFAULT),
+				data.getBytes(),
 				getPublicKey(Akey), getPrivateKey(bkey));
 		Tools.printLog("Encode:"+new String(encodeBytes));
 		
-		Tools.printLog("BPublicKey"+getPublicKey(bkey));
-		Tools.printLog("APrivateKey"+getPrivateKey(Akey));
+		
 		byte[] dencodeBytes=dencode(encodeBytes, getPublicKey(bkey), getPrivateKey(Akey));
 		Tools.printLog("Dencode:"+new String(dencodeBytes));
 	}
@@ -57,7 +59,7 @@ public class DH {
 	 * @return
 	 */
 	private String getPublicKey(Map<String, Object> map) {
-		Key key = (Key) map.get(publicKey);
+		Key key = (Key) map.get(PublicKey);
 		byte[] byteKeys = Base64.encode(key.getEncoded(), Base64.DEFAULT);
 		return new String(byteKeys);
 	}
@@ -69,7 +71,7 @@ public class DH {
 	 * @return
 	 */
 	private String getPrivateKey(Map<String, Object> map) {
-		Key key = (Key) map.get(privateKey);
+		Key key = (Key) map.get(PrivateKey);
 		byte[] byteKeys = Base64.encode(key.getEncoded(), Base64.DEFAULT);
 		return new String(byteKeys);
 	}
@@ -92,8 +94,8 @@ public class DH {
 			DHPrivateKey aprivateKey = (DHPrivateKey) keyPair.getPrivate();
 
 			Map<String, Object> map = new HashMap<String, Object>(2);
-			map.put(publicKey, apublicKey);
-			map.put(privateKey, aprivateKey);
+			map.put(PublicKey, apublicKey);
+			map.put(PrivateKey, aprivateKey);
 			return map;
 		} catch (Exception e) {
 			Tools.printLog(e);
@@ -122,8 +124,8 @@ public class DH {
 			DHPrivateKey bPrivateKey = (DHPrivateKey) keyPair.getPrivate();
 
 			Map<String, Object> keyMap = new HashMap<String, Object>(2);
-			keyMap.put(publicKey, bPublicKey);
-			keyMap.put(privateKey, bPrivateKey);
+			keyMap.put(PublicKey, bPublicKey);
+			keyMap.put(PrivateKey, bPrivateKey);
 			return keyMap;
 		} catch (Exception e) {
 			Tools.printLog(e);
