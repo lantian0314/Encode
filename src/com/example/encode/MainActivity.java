@@ -12,23 +12,25 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		//异或加密
-		String string="hhhhhhhhhhhhhhhhhhhhh";
-//		String After=yihuo.encode(string);
-//		Tools.printLog("After:"+After);
-//		Tools.printLog("Result:"+yihuo.encode(After));
+		// 异或加密
+		String string = "hhhhhhhhhhhhhhhhhhhhh";
+		// String After=yihuo.encode(string);
+		// Tools.printLog("After:"+After);
+		// Tools.printLog("Result:"+yihuo.encode(After));
 		/**
 		 * Des加密
 		 */
-		String key="abcdefghig01234567890123";
-		String ivKey="abcd1234";	
-		Tools.printLog("Before:"+string);
-		Des des=Des.getInstance(key,ivKey);
-		byte[] encodeByte=des.encode(string.getBytes());
-		Tools.printLog("After:"+new String(encodeByte));
+		// String key="abcdefghig01234567890123";
+		// String ivKey="abcd1234";
+		// Tools.printLog("Before:"+string);
+		// Des des=Des.getInstance(key,ivKey);
+		// byte[] encodeByte=des.encode(string.getBytes());
+		// Tools.printLog("After:"+new String(encodeByte));
+		//
+		// byte[] dencodeByte=des.dencode(encodeByte);
+		// Tools.printLog("Result:"+new String(dencodeByte));
 		
-		byte[] dencodeByte=des.dencode(encodeByte);
-		Tools.printLog("Result:"+new String(dencodeByte));
+		RSA.main();
 	}
 
 	@Override
