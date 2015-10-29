@@ -65,6 +65,10 @@ public class RSA {
 
 	}
 
+	/**
+	 * 初始化密钥，保存到Map集合中
+	 * @return
+	 */
 	public static Map<String, Object> initKey() {
 		try {
 			KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
@@ -86,6 +90,12 @@ public class RSA {
 		return null;
 	}
 
+	/**
+	 * 针对加密的数据进行签名
+	 * @param data 数据
+	 * @param privateKey 私钥
+	 * @return
+	 */
 	private static String sign(byte[] data, String privateKey) {
 		// 字节数组
 		//byte[] keyBytes = privateKey.getBytes();
@@ -109,6 +119,13 @@ public class RSA {
 		return null;
 	}
 
+	/**
+	 * 检查数据签名是否发生变化
+	 * @param data 数据
+	 * @param publicKey 公钥
+	 * @param sign 签名
+	 * @return
+	 */
 	private static boolean verify(byte[] data, String publicKey, String sign) {
 		//byte[] keyBytes = publicKey.getBytes();
 		byte[] keyBytes = Base64.decode(publicKey, Base64.DEFAULT);
@@ -132,6 +149,12 @@ public class RSA {
 		return false;
 	}
 
+	/**
+	 * 公钥加密
+	 * @param data 数据
+	 * @param key 公钥
+	 * @return
+	 */
 	private static byte[] encodedByPublicKey(byte[] data, String key) {
 		// byte[] keyBytes = key.getBytes();
 		byte[] keyBytes = Base64.decode(key, Base64.DEFAULT);
@@ -153,6 +176,12 @@ public class RSA {
 		return null;
 	}
 
+	/**
+	 * 私钥解密
+	 * @param data 数据
+	 * @param key 私钥
+	 * @return
+	 */
 	private static byte[] dencodeByPrivateKey(byte[] data, String key) {
 		// byte[] keyBytes = key.getBytes();
 		byte[] keyBytes = Base64.decode(key, Base64.DEFAULT);

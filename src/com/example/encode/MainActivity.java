@@ -30,7 +30,8 @@ public class MainActivity extends Activity {
 		// byte[] dencodeByte=des.dencode(encodeByte);
 		// Tools.printLog("Result:"+new String(dencodeByte));
 		
-		RSA.main();
+		//RSA.main();
+		new DH().main();
 	}
 
 	@Override
