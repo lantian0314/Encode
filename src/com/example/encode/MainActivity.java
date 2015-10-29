@@ -14,9 +14,21 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		//“ÏªÚº”√‹
 		String string="hhhhhhhhhhhhhhhhhhhhh";
-		String After=yihuo.encode(string);
-		Tools.printLog("After:"+After);
-		Tools.printLog("Result:"+yihuo.encode(After));
+//		String After=yihuo.encode(string);
+//		Tools.printLog("After:"+After);
+//		Tools.printLog("Result:"+yihuo.encode(After));
+		/**
+		 * Desº”√‹
+		 */
+		String key="abcdefghig01234567890123";
+		String ivKey="abcd1234";	
+		Tools.printLog("Before:"+string);
+		Des des=Des.getInstance(key,ivKey);
+		byte[] encodeByte=des.encode(string.getBytes());
+		Tools.printLog("After:"+new String(encodeByte));
+		
+		byte[] dencodeByte=des.dencode(encodeByte);
+		Tools.printLog("Result:"+new String(dencodeByte));
 	}
 
 	@Override
