@@ -30,8 +30,16 @@ public class MainActivity extends Activity {
 		// byte[] dencodeByte=des.dencode(encodeByte);
 		// Tools.printLog("Result:"+new String(dencodeByte));
 		
-		//RSA.main();
-		new DH().main();
+		String key="12345678";
+		String ivKey="abcd1234";
+		String data="hhhhhhhhhhhhhhhhhhhhhh";
+		Tools.printLog("Start:"+data);
+		
+		String encode=new AES(key, ivKey).encode(data.getBytes());
+		Tools.printLog("Encode:"+encode);
+		
+		byte[] dencode=new AES(key, ivKey).dencode(encode);
+		Tools.printLog("Result:"+new String(dencode));
 	}
 
 	@Override
