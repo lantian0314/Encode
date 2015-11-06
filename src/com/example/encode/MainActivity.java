@@ -4,6 +4,7 @@ import com.example.utils.Tools;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Base64;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
@@ -20,15 +21,29 @@ public class MainActivity extends Activity {
 		/**
 		 * Des加密
 		 */
-		String key="abcdefghig01234567890123";
-		String ivKey="abcd1234";	
-		Tools.printLog("Before:"+string);
-		Des des=Des.getInstance(key,ivKey);
-		byte[] encodeByte=des.encode(string.getBytes());
-		Tools.printLog("After:"+new String(encodeByte));
+//		String key="abcdefghig01234567890123";
+//		String ivKey="abcd1234";	
+//		Tools.printLog("之前:"+string);
+//		Des des=Des.getInstance(key,ivKey);
+//		byte[] encodeByte=des.encode(string.getBytes());
+//		Tools.printLog("After:"+new String(encodeByte));
+//		
+//		byte[] dencodeByte=des.dencode(encodeByte);
+//		Tools.printLog("Result:"+new String(dencodeByte));
 		
-		byte[] dencodeByte=des.dencode(encodeByte);
-		Tools.printLog("Result:"+new String(dencodeByte));
+		/**
+		 * AES加密
+		 */
+		String key="12345678";
+		String ivKey="abcd1234";
+		String data="hhhhhhhhhhhhhhhhh";
+		Tools.printLog("Start:"+data);
+		
+		String encode=new AES(key, ivKey).encode(data.getBytes());
+		Tools.printLog("Encode:"+encode);
+		
+		byte[] buffer=new AES(key, ivKey).dencode(encode);
+		Tools.printLog("After:"+new String(buffer));
 	}
 
 	@Override
