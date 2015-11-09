@@ -69,6 +69,9 @@ public class MainActivity extends Activity {
 		//µ√µΩ”Ô—‘
 		String language=new DeviceInfo(getApplicationContext()).getLanguage();
 		Tools.printLog("language:"+language);
+		
+		long appInstallTime=new DeviceInfo(getApplicationContext()).getAppInstallTime();
+		Tools.printLog("appInstallTime:"+appInstallTime);
 	}
 
 	@Override

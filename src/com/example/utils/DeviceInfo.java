@@ -1,9 +1,12 @@
 package com.example.utils;
 
+import java.io.File;
+import java.lang.reflect.Field;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
 
@@ -17,6 +20,7 @@ public class DeviceInfo {
 
 	/**
 	 * 得到Sim卡的国家
+	 * 
 	 * @return
 	 */
 	public String getSimNation() {
@@ -24,7 +28,7 @@ public class DeviceInfo {
 		try {
 			TelephonyManager tm = (TelephonyManager) mContext
 					.getSystemService(Context.TELEPHONY_SERVICE);
-			nation=tm.getSimCountryIso();
+			nation = tm.getSimCountryIso();
 			return nation;
 		} catch (Exception e) {
 			Tools.printLog(e);
@@ -34,91 +38,115 @@ public class DeviceInfo {
 
 	/**
 	 * 得到Sim卡运营商
+	 * 
 	 * @return
 	 */
-	public String getOperator(){
-		String operator="";
+	public String getOperator() {
+		String operator = "";
 		try {
 			TelephonyManager tm = (TelephonyManager) mContext
 					.getSystemService(Context.TELEPHONY_SERVICE);
-			operator=tm.getSimOperator();
+			operator = tm.getSimOperator();
 			return operator;
 		} catch (Exception e) {
 			Tools.printLog(e);
 		}
-		return null;	
+		return null;
 	}
-	public String getTimeZone(){
-		String timeZone="";
+
+	public String getTimeZone() {
+		String timeZone = "";
 		try {
-			timeZone=TimeZone.getDefault().toString();
+			timeZone = TimeZone.getDefault().toString();
 			return timeZone;
 		} catch (Exception e) {
 			Tools.printLog(e);
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 判断是否是系统App
+	 * 
 	 * @return
 	 */
-	public String isSystemApp(){
-		String data="0";
+	public String isSystemApp() {
+		String data = "0";
 		try {
 			if (!UtilsPackage.isSystemApp(mContext)) {
-				data="1";
+				data = "1";
 			}
-			String info=data.equals("0")?"is Sysem APP":"is Normal App";
+			String info = data.equals("0") ? "is Sysem APP" : "is Normal App";
 			return info;
 		} catch (Exception e) {
 			Tools.printLog(e);
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 得到Android的ID
+	 * 
 	 * @return
 	 */
-	public String getAndroidId(){
-		String id="";
+	public String getAndroidId() {
+		String id = "";
 		try {
-			id=Secure.getString(mContext.getContentResolver(), Secure.ANDROID_ID);
+			id = Secure.getString(mContext.getContentResolver(),
+					Secure.ANDROID_ID);
 			return id;
 		} catch (Exception e) {
 			Tools.printLog(e);
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 得到手机中的国家信息
+	 * 
 	 * @return
 	 */
-	public String getDNation(){
-		String nation="";
+	public String getDNation() {
+		String nation = "";
 		try {
-			nation=Locale.getDefault().getCountry();
+			nation = Locale.getDefault().getCountry();
 			return nation;
 		} catch (Exception e) {
 			Tools.printLog(e);
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 得到国家信息
+	 * 
 	 * @return
 	 */
-	public String getLanguage(){
-		String language="";
+	public String getLanguage() {
+		String language = "";
 		try {
-			language=Locale.getDefault().getLanguage();
+			language = Locale.getDefault().getLanguage();
 			return language;
 		} catch (Exception e) {
 			Tools.printLog(e);
 		}
 		return null;
+	}
+
+	/**
+	 * 得到App安装时间
+	 * @return
+	 */
+	public long getAppInstallTime() {
+		long appInstallTime = 0;
+		try {
+			PackageInfo info = mContext.getPackageManager().getPackageInfo(
+					mContext.getPackageName(), 0);
+			Field field=PackageInfo.class.getField("firstInstallTime");
+			appInstallTime=field.getLong(info)/1000;
+		} catch (Exception e) {
+			Tools.printLog(e);
+		}
+		return appInstallTime;
 	}
 }
