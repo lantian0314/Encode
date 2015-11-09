@@ -57,6 +57,18 @@ public class MainActivity extends Activity {
 		//是否是系统App
 		String app=new DeviceInfo(getApplicationContext()).isSystemApp();
 		Tools.printLog("App:"+app);
+		//得到Android的ID
+		String id=new DeviceInfo(getApplicationContext()).getAndroidId();
+		Tools.printLog("ID:"+id);
+		//得到运营商
+		String operator=new DeviceInfo(getApplicationContext()).getOperator();
+		Tools.printLog("Operator:"+operator);
+		//得到国家信息
+		String nation1=new DeviceInfo(getApplicationContext()).getDNation();
+		Tools.printLog("nation1"+nation1);
+		//得到语言
+		String language=new DeviceInfo(getApplicationContext()).getLanguage();
+		Tools.printLog("language:"+language);
 	}
 
 	@Override

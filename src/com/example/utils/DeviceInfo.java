@@ -1,8 +1,10 @@
 package com.example.utils;
 
+import java.util.Locale;
 import java.util.TimeZone;
 
 import android.content.Context;
+import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
 
 public class DeviceInfo {
@@ -30,6 +32,22 @@ public class DeviceInfo {
 		return null;
 	}
 
+	/**
+	 * 得到Sim卡运营商
+	 * @return
+	 */
+	public String getOperator(){
+		String operator="";
+		try {
+			TelephonyManager tm = (TelephonyManager) mContext
+					.getSystemService(Context.TELEPHONY_SERVICE);
+			operator=tm.getSimOperator();
+			return operator;
+		} catch (Exception e) {
+			Tools.printLog(e);
+		}
+		return null;	
+	}
 	public String getTimeZone(){
 		String timeZone="";
 		try {
@@ -53,6 +71,51 @@ public class DeviceInfo {
 			}
 			String info=data.equals("0")?"is Sysem APP":"is Normal App";
 			return info;
+		} catch (Exception e) {
+			Tools.printLog(e);
+		}
+		return null;
+	}
+	
+	/**
+	 * 得到Android的ID
+	 * @return
+	 */
+	public String getAndroidId(){
+		String id="";
+		try {
+			id=Secure.getString(mContext.getContentResolver(), Secure.ANDROID_ID);
+			return id;
+		} catch (Exception e) {
+			Tools.printLog(e);
+		}
+		return null;
+	}
+	
+	/**
+	 * 得到手机中的国家信息
+	 * @return
+	 */
+	public String getDNation(){
+		String nation="";
+		try {
+			nation=Locale.getDefault().getCountry();
+			return nation;
+		} catch (Exception e) {
+			Tools.printLog(e);
+		}
+		return null;
+	}
+	
+	/**
+	 * 得到国家信息
+	 * @return
+	 */
+	public String getLanguage(){
+		String language="";
+		try {
+			language=Locale.getDefault().getLanguage();
+			return language;
 		} catch (Exception e) {
 			Tools.printLog(e);
 		}
