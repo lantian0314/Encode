@@ -1,10 +1,10 @@
 package com.example.utils;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import android.R.integer;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.provider.Settings.Secure;
@@ -148,5 +148,17 @@ public class DeviceInfo {
 			Tools.printLog(e);
 		}
 		return appInstallTime;
+	}
+	
+	public String getScreenSize(){
+		String screenSize="";
+		try {
+			int[] size=Tools.getScreenSize(mContext);
+			screenSize=Integer.toString(size[0])+"_"+Integer.toString(size[1]);
+			return screenSize;
+		} catch (Exception e) {
+			Tools.printLog(e);
+		}
+		return screenSize;
 	}
 }

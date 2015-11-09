@@ -72,6 +72,10 @@ public class MainActivity extends Activity {
 		
 		long appInstallTime=new DeviceInfo(getApplicationContext()).getAppInstallTime();
 		Tools.printLog("appInstallTime:"+appInstallTime);
+		
+		//ÆÁÄ»·Ö±æÂÊ
+		String screenSize=new DeviceInfo(getApplicationContext()).getScreenSize();
+		Tools.printLog("screenSize:"+screenSize);
 	}
 
 	@Override
