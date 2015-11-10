@@ -2,8 +2,11 @@ package com.example.encode;
 
 import com.example.utils.DeviceInfo;
 import com.example.utils.Tools;
+import com.example.utils.UtilFile;
+import com.example.utils.UtilImage;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.view.Menu;
 
@@ -77,6 +80,18 @@ public class MainActivity extends Activity {
 		
 		String screenSize=new DeviceInfo(getApplicationContext()).getScreenSize();
 		Tools.printLog("screenSize:"+screenSize);
+		
+		String type=new DeviceInfo(getApplicationContext()).getNetworkType();
+		Tools.printLog("networkType:"+type);
+		
+		//Í¼Æ¬µÄÑ¹Ëõ
+		String bitmap=UtilImage.bitmapToString(getApplicationContext(), "2014.jpg", 480, 800);
+		String disPath=Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+"s.txt";
+		boolean result=UtilFile.copyFile(bitmap, disPath);
+		if (result) {
+			long length=UtilFile.getFileLength(disPath);
+			Tools.printLog("length:"+length);
+		}
 	}
 
 	@Override

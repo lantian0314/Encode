@@ -7,6 +7,8 @@ import java.util.TimeZone;
 import android.R.integer;
 import android.content.Context;
 import android.content.pm.PackageInfo;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
 
@@ -135,6 +137,7 @@ public class DeviceInfo {
 
 	/**
 	 * 得到App安装时间
+	 * 
 	 * @return
 	 */
 	public long getAppInstallTime() {
@@ -142,23 +145,50 @@ public class DeviceInfo {
 		try {
 			PackageInfo info = mContext.getPackageManager().getPackageInfo(
 					mContext.getPackageName(), 0);
-			Field field=PackageInfo.class.getField("firstInstallTime");
-			appInstallTime=field.getLong(info)/1000;
+			Field field = PackageInfo.class.getField("firstInstallTime");
+			appInstallTime = field.getLong(info) / 1000;
 		} catch (Exception e) {
 			Tools.printLog(e);
 		}
 		return appInstallTime;
 	}
-	
-	public String getScreenSize(){
-		String screenSize="";
+
+	/**
+	 * 屏幕的尺寸
+	 * 
+	 * @return
+	 */
+	public String getScreenSize() {
+		String screenSize = "";
 		try {
-			int[] size=Tools.getScreenSize(mContext);
-			screenSize=Integer.toString(size[0])+"_"+Integer.toString(size[1]);
+			int[] size = Tools.getScreenSize(mContext);
+			screenSize = Integer.toString(size[0]) + "_"
+					+ Integer.toString(size[1]);
 			return screenSize;
 		} catch (Exception e) {
 			Tools.printLog(e);
 		}
 		return screenSize;
+	}
+
+	/**
+	 * 网络连接的类型
+	 * 
+	 * @return
+	 */
+	public String getNetworkType() {
+		String type = "";
+		try {
+			ConnectivityManager manager = (ConnectivityManager) mContext
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo info=manager.getActiveNetworkInfo();
+			type=info.getTypeName();
+			if (type.equals("mobile")) {
+				type=info.getExtraInfo();
+			}
+		} catch (Exception e) {
+			Tools.printLog(e);
+		}
+		return type;
 	}
 }
