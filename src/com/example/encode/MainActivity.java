@@ -2,6 +2,7 @@ package com.example.encode;
 
 import com.example.utils.DeviceInfo;
 import com.example.utils.Tools;
+import com.example.utils.UtilCompress;
 import com.example.utils.UtilFile;
 import com.example.utils.UtilImage;
 
@@ -100,6 +101,12 @@ public class MainActivity extends Activity {
 		//byte[] dencode=Hex.hex2Bytes(hexRes);
 		byte[] dencode=Hex.hex2BytesPro(hexRes);
 		Tools.printLog("hex2Bytes:"+new String(dencode));
+		
+		//Compress
+		byte[] data=UtilCompress.getGZipCompress(string);
+		Tools.printLog("Compress:"+data);
+		byte[] uncompress=UtilCompress.getGZipUncompress(data);
+		Tools.printLog("unCompress:"+new String(uncompress));
 	}
 
 	@Override
