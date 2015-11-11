@@ -41,12 +41,12 @@ public class AES {
 	 * @param ivKey
 	 * @return
 	 */
-//	public static AES getInstance(String key,String ivKey){
-//		if (aes==null) {
-//			aes=new AES(key, ivKey);
-//		}
-//		return aes;
-//	}
+	public static AES getInstance(String key,String ivKey){
+		if (aes==null) {
+			aes=new AES(key, ivKey);
+		}
+		return aes;
+	}
 	/**
 	 * 甯﹀弬鐨勬瀯閫犲嚱鏁�
 	 * @param key

@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		// “ÏªÚº”√‹
-		String string = "hhhhhhhhhhhhhhhhhhhhh";
+		//String string = "hhhhhhhhhhhhhhhhhhhhh";
 		// String After=yihuo.encode(string);
 		// Tools.printLog("After:"+After);
 		// Tools.printLog("Result:"+yihuo.encode(After));
@@ -92,6 +92,14 @@ public class MainActivity extends Activity {
 			long length=UtilFile.getFileLength(disPath);
 			Tools.printLog("length:"+length);
 		}
+		
+		//Byte2Hex
+		String string="@@@@";
+		String hexRes=Hex.bytesToHex(string.getBytes());
+		Tools.printLog("Hex:"+hexRes);
+		//byte[] dencode=Hex.hex2Bytes(hexRes);
+		byte[] dencode=Hex.hex2BytesPro(hexRes);
+		Tools.printLog("hex2Bytes:"+new String(dencode));
 	}
 
 	@Override
