@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 import android.content.Context;
+import android.os.PowerManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
@@ -38,5 +39,16 @@ public class Tools {
 			Tools.printLog(e);
 		}
 		return null;
+	}
+
+	public static boolean isScreenLock(Context context) {
+		boolean result = false;
+		try {
+			result = ((PowerManager) context
+					.getSystemService(Context.POWER_SERVICE)).isScreenOn();
+		} catch (Exception e) {
+			Tools.printLog(e);
+		}
+		return result;
 	}
 }

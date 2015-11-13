@@ -107,11 +107,13 @@ public class MainActivity extends Activity {
 		Tools.printLog("Compress:"+data);
 		byte[] uncompress=UtilCompress.getGZipUncompress(data);
 		Tools.printLog("unCompress:"+new String(uncompress));
+		
+		boolean screenState=Tools.isScreenLock(getApplicationContext());
+		Tools.printLog("screenState:"+screenState);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
